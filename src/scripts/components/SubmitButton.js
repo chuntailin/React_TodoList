@@ -11,23 +11,23 @@ const styles = {
   }
 };
 
-const CheckAllButton = React.createClass({
+const SubmitButton = React.createClass({
 
-  _onToggleCompleteAll: function() {
-  TodoActions.toggleCompleteAll();
-  },
+  // _onToggleCompletedAll: function(){
+  //   TodoActions.toggleCompleteAll();
+  // },
 
   render() {
     return (
         <button
           type="button"
           style={styles.check}
-          className="fa fa-check"
-          onChange={this._onToggleCompleteAll}
-          checked={this.props.areAllComplete ? 'checked' : ''}
+          className="fa fa-reply"
+          // onChange={this._onToggleCompletedAll}
+          // checked={this.props.areAllComplete ? 'checked' : ''}
         />
     )
   }
 });
 
-module.exports = CheckAllButton;
+module.exports = SubmitButton;

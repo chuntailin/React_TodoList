@@ -5,8 +5,10 @@ const styles = {
     height: '100%',
     width: '30px',
     color: '#A9A9A9',
-    backgroundColor: '#FFFFFF',
-    border: 'none'
+    backgroundColor: '#F8F8FF',
+    border: 'none',
+    outline: 'none',
+    flex: 1
   }
 };
 

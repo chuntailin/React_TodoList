@@ -4,14 +4,20 @@ var TodoActions = require('../actions/TodoActions');
 const styles = {
   box: {
     height: '100%',
-    fontSize: '12px',
     color: '#A9A9A9',
-    paddingLeft: '10px',
-    width: '100px'
+    backgroundColor: '#F8F8FF',
+    border: 'none',
+    outline: 'none',
+    flex: 1
   }
 };
 
-const NumberOfListItems = React.createClass({
+const ClearAllButton = React.createClass({
+
+  _onClear: function(){
+    TodoActions.destroyAll()
+  },
+
   render() {
     var allTodos = this.props.allTodos;
     var total = Object.keys(allTodos).length;
@@ -21,9 +27,11 @@ const NumberOfListItems = React.createClass({
     }
 
     return (
-        <p style={styles.box}> {total} item left </p>
+        <button type='button' onClear={this._onClear} style={styles.box} >
+        Clear All
+        </button>
     )
   }
 });
 
-module.exports = NumberOfListItems;
+module.exports = ClearAllButton;

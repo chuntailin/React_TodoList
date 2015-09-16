@@ -1,18 +1,35 @@
 import React from 'react';
+var TodoActions = require('../actions/TodoActions');
 
 const styles = {
   box: {
     width: '54px',
-    height: '100%',
+    height: '54px',
     backgroundColor: 'transparent',
-    border: 'none'
+    borderColor: '#F8F8FF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    outline: 'none'
   }
 };
 
 const CheckButton = React.createClass({
+
+  _onToggleComplete: function(){
+    TodoActions.toggleComplete(this.props.todos);
+  },
+
   render() {
+    var todos = this.props.todos;
+
     return (
-      <button type="button" style={styles.box} className="fa fa-check"/>
+      <input
+      type="checkbox"
+      style={styles.box}
+      // checked={todo1.complete}
+      // className="fa fa-check"
+      onChange={this._onToggleComplete}
+      />
     )
   }
 });

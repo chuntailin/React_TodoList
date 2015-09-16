@@ -1,20 +1,31 @@
 import React from 'react';
+var TodoActions = require('../actions/TodoActions');
+var ReactPropTypes = React.PropTypes;
 
 const styles = {
   box: {
-    flex:'1',
-    fontSize : '25px',
-    fontFamily: 'verdana',
-    border: 'none',
-    paddingLeft: '20px',
-    padding: '10px'
+    // flex:'1',
+    // fontSize : '20px',
+    // fontFamily: 'verdana',
+    // border: 'none',
+    // paddingLeft: '22px',
+    // padding: '10px'
   }
 };
 
 const ItemContent = React.createClass({
+
+  propTypes: {
+    todo1: ReactPropTypes.object.isRequired
+  },
+
   render() {
+    var todo1 = this.props.todo;
+
     return (
-      <text style={styles.box}> Hello World </text>
+      <label>
+      {todo1.text}
+      </label>
     )
   }
 });
