@@ -1,7 +1,8 @@
 import React from 'react';
-
+import {Link} from 'react-router-component';
 var ReactPropTypes = React.PropTypes;
-var ENTER_KEY_CODE = 13;
+var TodoStore = require('../stores/TodoStore');
+var TodoActions = require('../actions/TodoActions');
 
 const styles = {
   box: {
@@ -19,33 +20,35 @@ const styles = {
 
 const InputBox = React.createClass({
 
-  propTypes: {
-    id: ReactPropTypes.string,
-    placeholder: ReactPropTypes.string,
-    onSave: ReactPropTypes.func.isRequired,
-    value: ReactPropTypes.string
-  },
-
   getInitialState: function() {
     return {
-      value: this.props.value || ''
-    };
+      content: ''
+    }
   },
 
-  _save: function(){
-    this.props.onSave(this.state.value);
-    this.setState({value:''});
+  componentDidMount(){
+    TodoStore.addChangeListener(this.todoUpdate);
   },
 
-  _onChange: function(event){
+  componentWillUnmount(){
+    TodoStore.removeChangeListener(this.todoUpdate);
+  },
+
+  todoUpdate(){
     this.setState({
-      value: event.target.value
+      content: ''
     });
   },
 
-  _onKeyDown: function(event){
-    if (event.KeyCode === ENTER_KEY_CODE){
-      this._save();
+  _onChange: function(e){
+    this.setState({
+      content: e.target.value
+    });
+  },
+
+  _onKeyDown: function(e){
+    if (e.keyCode === 13 && this.state.content){
+      TodoActions.create(this.state.content);
     }
   },
 
@@ -53,13 +56,11 @@ const InputBox = React.createClass({
     return (
      <input
         style={styles.box}
-        id={this.props.id}
         placeholder="What needs to be done ? "
-        onBlur={this._save}
+        type='text'
         onChange={this._onChange}
         onKeyDown={this._onKeyDown}
-        value={this.state.value}
-        autoFocus={true}
+        value={this.state.content}
      />
     )
   }

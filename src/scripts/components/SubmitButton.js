@@ -13,18 +13,12 @@ const styles = {
 
 const SubmitButton = React.createClass({
 
-  // _onToggleCompletedAll: function(){
-  //   TodoActions.toggleCompleteAll();
-  // },
-
   render() {
     return (
         <button
           type="button"
           style={styles.check}
           className="fa fa-reply"
-          // onChange={this._onToggleCompletedAll}
-          // checked={this.props.areAllComplete ? 'checked' : ''}
         />
     )
   }

@@ -6,6 +6,7 @@ import CompletedButton from './CompletedButton';
 import ClearAllButton from './ClearAllButton';
 var ReactPropTypes = React.PropTypes;
 var TodoActions = require('../actions/TodoActions');
+import {Link} from 'react-router-component';
 
 const styles = {
   check: {

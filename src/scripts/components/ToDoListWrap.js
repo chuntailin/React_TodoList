@@ -2,8 +2,8 @@ import React from 'react';
 import InputBox from './InputBox';
 import CheckAllButton from './CheckAllButton';
 import SubmitButton from './SubmitButton'
-// import TodoAction from '../actions/TodoAction.js';
 var TodoActions = require('../actions/TodoActions');
+import {Link} from 'react-router-component';
 
 const styles = {
   wrap: {
@@ -14,18 +14,11 @@ const styles = {
 
 const ToDoListWrap = React.createClass({
 
-  _onSave: function(text) {
-    if (text.trim()){
-      TodoActions.create(text);
-    }
-  },
-
   render() {
     return (
       <div style={styles.wrap}>
-      < CheckAllButton / >
-      < InputBox onSave={this._onSave}/ >
-      < SubmitButton / >
+      < CheckAllButton isCollapsed={this.props.isCollapsed} toggleComplete={this.props.toggleComplete}/ >
+      < InputBox / >
       </div>
     )
   }

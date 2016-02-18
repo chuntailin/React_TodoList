@@ -1,5 +1,6 @@
 import React from 'react';
 var TodoActions = require('../actions/TodoActions');
+import {Link} from 'react-router-component';
 
 const styles = {
   box: {

@@ -1,31 +1,38 @@
 import React from 'react';
 var TodoActions = require('../actions/TodoActions');
+import {Link} from 'react-router-component';
 
 const styles = {
-  check: {
-    width: '54px',
+  wrap: {
+    width: 54
+  },
+  button: {
+    backgroundColor: 'transparent',
+    color: '#AAA',
+    display: 'flex',
+    width: '100%',
+    border: 1,
     height: '100%',
-    backgroundColor: '#FFFFFF',
-    border: 'none',
-    outline: 'none'
+    alignItems: 'center',
+    justifyContent: 'center',
+    outline: 'none',
+    fontSize: '1.5rem',
+    cursor: 'pointer',
+    ':hover': {
+      color: '#777'
+    }
   }
 };
 
 const CheckAllButton = React.createClass({
 
-  _onToggleCompleteAll: function() {
-  TodoActions.toggleCompleteAll();
-  },
-
   render() {
     return (
-        <button
-          type="button"
-          style={styles.check}
-          className="fa fa-check"
-          onChange={this._onToggleCompleteAll}
-          checked={this.props.areAllComplete ? 'checked' : ''}
-        />
+      <div style={styles.wrap}>
+        <button onClick={this.props.toggleComplete} type='button' style={styles.button}>
+          <span className={'fa ' + (this.props.isCollapsed ? 'fa-chevron-up' : 'fa-chevron-down')}></span>
+        </button>
+      </div>
     )
   }
 });

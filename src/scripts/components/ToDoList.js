@@ -1,10 +1,11 @@
 import React from 'react';
 import ToDoListWrap from './ToDoListWrap';
-import AllListItems from './AllListItems';
+import ListItems from './ListItems';
 import Footer from './Footer';
 import Title from './Title';
-// import TodoStore from '../stores/TodoStore.js';
+import {Link} from 'react-router-component';
 var TodoStore = require('../stores/TodoStore');
+var TodoActions = require('../actions/TodoActions');
 
 const styles = {
   List:{
@@ -18,7 +19,7 @@ const styles = {
   function getTodoState(){
     return{
       allTodos: TodoStore.getAll(),
-      areAllComplete: TodoStore.areAllComplete()
+      complete: false
     };
   }
 
@@ -28,27 +29,34 @@ const ToDoList = React.createClass({
     return getTodoState();
   },
 
-  _onChange: function(){
-    this.setState(getTodoState());
-  },
-
   componentDidMount: function(){
     TodoStore.addChangeListener(this._onChange);
+    TodoActions.fetch();
   },
 
   componentWillUnmount: function(){
     TodoStore.removeChangeListener(this._onChange);
   },
 
+  _onChange: function(){
+    this.setState(getTodoState());
+  },
+
+  toggleComplete: function(){
+    this.setState({
+      complete: !this.state.complete
+    });
+  },
+
   render() {
-    
+    const list = this.state.complete ? [] : this.state.allTodos;
+
     return (
       <div style={styles.List}>
-        < ToDoListWrap/ >
-        < AllListItems
-          allTodos={this.state.allTodos}
-          areAllComplete={this.state.areAllComplete}
-        / >
+        < ToDoListWrap isCollapsed={this.state.complete} toggleComplete={this.toggleComplete}/ >
+        {list.map((todo) => {
+          return <ListItems todo={todo} />
+        })}
         < Footer allTodos={this.state.allTodos}/ >
       </div>
     )

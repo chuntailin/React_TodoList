@@ -1,31 +1,28 @@
 import React from 'react';
 var TodoActions = require('../actions/TodoActions');
 var ReactPropTypes = React.PropTypes;
+import {Link} from 'react-router-component';
 
 const styles = {
-  box: {
-    // flex:'1',
-    // fontSize : '20px',
-    // fontFamily: 'verdana',
-    // border: 'none',
-    // paddingLeft: '22px',
-    // padding: '10px'
+  wrap: {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 0 0 16px',
+    boxSizing: 'border-box'
+  },
+  text: {
+    fontSize: '1.25rem',
+    textAlign: 'left'
   }
 };
 
 const ItemContent = React.createClass({
-
-  propTypes: {
-    todo1: ReactPropTypes.object.isRequired
-  },
-
   render() {
-    var todo1 = this.props.todo;
-
     return (
-      <label>
-      {todo1.text}
-      </label>
+      <div style={styles.wrap}>
+        <span style={styles.text}>{this.props.content}</span>
+      </div>
     )
   }
 });

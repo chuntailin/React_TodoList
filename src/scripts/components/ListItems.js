@@ -2,7 +2,8 @@ import React from 'react';
 import CheckButton from './CheckButton';
 import InputBox from './InputBox';
 import DeleteButton from './DeleteButton';
-// import TodoAction from '../actions/TodoAction.js';
+import ItemContent from './ItemContent';
+import {Link} from 'react-router-component';
 var TodoActions = require('../actions/TodoActions');
 var ReactPropTypes = React.PropTypes;
 
@@ -14,32 +15,21 @@ const styles = {
   }
 };
 
+const T = React.PropTypes;
+
 const ListItems = React.createClass({
 
   propTypes: {
-    todo: ReactPropTypes.object.isRequired
+    todo: T.object.isRequired
   },
-
-  _onSave: function(text) {
-    TodoActions.updateText(this.props.todo.id, text);
-  },
-
 
   render() {
-    var todo = this.props.todo;
 
     return (
-        <div style={styles.check} key={todo.id}>
-          <CheckButton todo={this.props.todo}/ >
-          <label style={
-            {height: '100%',
-            paddingTop: '3px',
-            flex: 1,
-            fontSize: '20px'}
-          }>
-          {todo.text}
-          </label>
-          <DeleteButton todo={this.props.todo}/ >
+        <div style={styles.check} >
+          <CheckButton isCompleted={this.props.todo.complete} todoId={this.props.todo.id}/ >
+          <ItemContent content={this.props.todo.content}/ >
+          <DeleteButton todoId={this.props.todo.id}/ >
         </div>
     )
   }

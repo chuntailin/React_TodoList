@@ -18,7 +18,7 @@ var ClientContainer = fs.readFileSync(path.resolve(__dirname, '_index.html'), {
 
 // Routes
 var Routes = {
-  main: require('./api/routes/main.js')
+  todos: require('./api/routes/todos.js')
 };
 
 // Get Server Render
@@ -53,7 +53,7 @@ module.exports = function (app) {
     next();
   });
 
-  app.use(Routes.main);
+  app.use('/todos', Routes.todos);
 
   // Fallback to index.html
   app.use(function (req, res) {
